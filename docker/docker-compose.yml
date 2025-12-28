@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: servicepulse-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: servicepulse
+      POSTGRES_PASSWORD: servicepulse
+      POSTGRES_DB: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: servicepulse-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: servicepulse
+      RABBITMQ_DEFAULT_PASS: servicepulse
+
+volumes:
+  postgres_data:
